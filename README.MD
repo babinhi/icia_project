@@ -1,4 +1,4 @@
-<div style="text-align: center "><h3>프로젝트 이름 : icia 커피쇼핑몰</h3> </div>
+<div style="text-align: center "><h3>프로젝트 이름 : 만들수 있을까 커피쇼핑몰</h3> </div>
 
 -------------------------
 
