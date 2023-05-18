@@ -16,7 +16,6 @@ public class MemberService {
     private MemberRepository memberRepository;
 
     public void save(MemberDTO memberDTO) throws IOException {
-        memberRepository.save(memberDTO);
         if(memberDTO.getMemberFile().isEmpty()){
             System.out.println("파일없음");
             memberDTO.setMemberProfile(0);
@@ -53,6 +52,19 @@ public class MemberService {
                 memberFile.transferTo(new File(savePath));
                 memberRepository.saveFile(memberFileDTO);
             }
+        }
+    }
+
+    public MemberDTO findByMemberEmail(String loginEmail) {
+        return memberRepository.findByMemberEmail(loginEmail);
+    }
+
+    public boolean login(MemberDTO memberDTO) {
+        MemberDTO dto = memberRepository.login(memberDTO);
+        if (dto != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

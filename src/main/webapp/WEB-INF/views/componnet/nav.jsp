@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<div id="nav">
+
+
+<div id="nav" >
     <ul>
         <li>
             <a href="/">메인으로</a>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="/resources/css/main.css">
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">w
+</head>
+<body>
+<div id="header" class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4">Simple header</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/member/save" class="nav-link">로그인</a></li>
+            <li class="nav-item"><a href="/member/mypage" class="nav-link">회원가입</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">마이페이지</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+    </header>
+</div>
+<div id="nav" class="container">
+    <ul>
+        <li>
+            <a href="/">메인으로</a>
+        </li>
+        <li>
+            <a href="#">원두</a>
+        </li>
+        <li>
+            <a href="#">관련용품</a>
+        </li>
+        <li>
+            <a href="#">리필</a>
+        </li>
+        <li>
+            <a href="#">문의하기</a>
+        </li>
+        <li class="login-name" id="login-area">
+        <li class="login-name">
+            <c:choose>
+                <c:when test="${sessionScope.loginEmail != null}">
+                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" style="color: black;">${sessionScope.loginEmail} 님</a>
+                    <a href="/member/logout">logout</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/member/login">login</a>
+                </c:otherwise>
+            </c:choose>
+        </li>
+        <li class="login-name">
+            <c:if test="${sessionScope.loginEmail == 'admin'}">
+                <a href="/member/manager">회원리스트</a>
+                <a href="/board/paging" class="left1">글목록</a>
+            </c:if>
+        </li>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
