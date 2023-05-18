@@ -49,8 +49,13 @@ public class MemberController {
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());
             return"redirect:/";
         } else {
-            return "memberPages/LoginError";
+            return "memberPages/Loginerror";
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginEmail");
+        return "redirect:/";
     }
 
 }

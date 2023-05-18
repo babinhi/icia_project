@@ -19,7 +19,7 @@
 <%@include file="componnet/nav.jsp"%>
 <a href="/member/save">회원가입</a>
 <a href="/member/login">로그인</a>
-<a href="/product/Productsave">상품등록</a>
+<a href="/product/productSave">상품등록</a>
 <a href="/order/cart">장바구니</a>
 <%@include file="componnet/footer.jsp"%>
 </body>

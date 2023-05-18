@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Product">
+    <insert id="save" parameterType="product" useGeneratedKeys="true" keyProperty="id">
+        insert into product_table(memberId, productTitle, productContents, productWriter, fileAttached)
+        values(#{memberId}, #{productTitle}, #{productContents}, #{productWriter} ,#{fileAttached})
+    </insert>
+
+    <insert id="saveFile" parameterType="productFile">
+        insert into product_file_table(originalFileName, storedFileName, productId)
+        values (#{originalFileName}, #{storedFileName}, #{productId})
+    </insert>
+
+</mapper>

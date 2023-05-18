@@ -4,23 +4,24 @@
 }
 
 #header{
-    background-color: #CCD5AE;
+    background-color: black;
+    color: white;
     text-align: center;
     padding: 20px;
 }
 
 #nav{
-    background-color:#E9EDC9 ;
+    /*background-color:#E9EDC9 ;*/
 
 }
 
 #section{
-    background-color: #f8f6ee;
+    /*background-color: #f8f6ee;*/
 
     padding: 20px;
 }
 #footer{
-    background-color: #CCD5AE;
+    /*background-color: black;*/
     text-align: center;
     padding: 20px;
 }
