@@ -5,8 +5,8 @@
 
 <mapper namespace="Member">
     <insert id="save" parameterType="member" useGeneratedKeys="true" keyProperty="id">
-        insert into smember_table(memberEmail, memberPassword, memberName, memberMobile, memberProfile)
-        values (#{memberEmail}, #{memberPassword}, #{memberName}, #{memberMobile}, #{memberProfile})
+        insert into smember_table(memberEmail, memberPassword, memberName, memberMobile, memberProfile, memberAddress)
+        values (#{memberEmail}, #{memberPassword}, #{memberName}, #{memberMobile}, #{memberProfile}, #{memberAddress})
     </insert>
     <insert id="saveFile" parameterType="memberFile">
         insert into smember_file_table(originalFileName, storedFileName, memberId)
@@ -17,6 +17,30 @@
     </select>
     <select id="login" parameterType="member" resultType="member">
         select * from smember_table where memberEmail = #{memberEmail} and memberPassword = #{memberPassword}
+    </select>
+    <select id="findFile" parameterType="Long" resultType="memberFile" >
+        select * from smember_file_table where memberId =#{memberId}
+    </select>
+
+    <select id="searchCount" parameterType="java.util.HashMap" resultType="member">
+        select count(id) from ${type} where boardTitle like concat('%',#{q},'%')
+    </select>
+    <update id="update" parameterType="member">
+        update smember_table
+        set memberPassword=#{memberPassword},
+            memberName=#{memberName},
+            memberMobile=#{memberMobile},
+            memberAddress=#{memberAddress}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="member">
+        delete from smember_table where id =#{id}
+    </delete>
+    <select id="findById" parameterType="Long" resultType="member">
+        select * from smember_table where id=(#{id})
+    </select>
+    <select id="findAll" resultType="member">
+        select * from smember_table
     </select>
 </mapper>
 

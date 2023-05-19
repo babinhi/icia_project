@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</head>
+<style>
+    #sample6_address{
+        width: 375px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+<div id="header">
+    <h2>icia shop</h2>
+</div>
+<div id="nav">
+    <ul>
+        <li>
+            <a href="/">메인으로</a>
+        </li>
+        <li>
+            <a href="/member/save">회원가입</a>
+        </li>
+        <li>
+            <a href="/member/login">로그인</a>
+        </li>
+        <li>
+            <a href="/board/boardSave">글쓰기</a>
+        </li>
+        <li>
+            <a href="/board/paging">게시판</a>
+        </li>
+        <li class="login-name" id="login-area">
+        <li class="login-name">
+            <c:choose>
+                <c:when test="${sessionScope.loginEmail != null}">
+                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" style="color: black;">${sessionScope.loginEmail}
+                        님</a>
+                    <a href="/member/logout">logout</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/member/login">login</a>
+                </c:otherwise>
+            </c:choose>
+        </li>
+        <li class="login-name">
+            <c:if test="${sessionScope.loginEmail == 'admin'}">
+                <a href="/member/manager">회원리스트</a>
+                <a href="/product/Productsave" class="left1">상품등록</a>
+            </c:if>
+        </li>
+        </li>
+    </ul>
+</div>
+<div id="section">
+    <form action="/member/save" method="post" id="save-form" enctype="multipart/form-data">
+        <input type="text" name="memberEmail" id="member-email" onblur="email_check()" placeholder="이메일">
+        <p id="check-result"></p><br>
+        <input type="text" name="memberPassword" id="member-password" onblur="password_check()" placeholder="비밀번호">
+        <p id="pass-result"></p><br>
+        <input type="text" id="password-check" onblur="check_password()" placeholder="비밀번호">
+        <p id="pass-check"></p><br>
+        <input type="text" name="memberName" id="member-check" onblur="name_check()" placeholder="성명">
+        <p id="name-result"></p><br>
+        <input type="text" name="memberMobile" id="member-mobile" onblur="mobile_check()" placeholder="전화번호">
+        <p id="mobile-result"></p><br>
+        <input type="file" name="memberFile" placeholder="프로필사진"><br>
+
+        <input type="hidden" name="memberAddress" id="memberAddress">
+        <input type="hidden" name="memberAddress" id="memberAddress">
+
+        <div style="display: inline-block">
+            <input type="text" id="sample6_postcode" placeholder="우편번호"></div>
+        <div style="display: inline-block">
+            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
+        <br>
+
+        <input type="text" id="sample6_address" placeholder="주소">
+        <div style="display: inline-block">
+            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+        </div>
+        <div style="display: inline-block">
+            <input type="text" id="sample6_extraAddress" placeholder="참고항목"></div>
+        <br><br><br>
+        <input type="submit" value="가입하기" onclick="member_address()">
+    </form>
+</div>
+<div id="footer">
+
+</div>
+<script>
+    const date = new Date();
+    console.log(date);
+    console.log(date.getFullYear());
+    const footer = document.getElementById("footer");
+    footer.innerHTML = "<p>&copy; " + date.getFullYear() + "&nbsp; HRDKOREA  All rights reserved. </p>";
+</script>
+</body>
+</html>

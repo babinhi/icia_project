@@ -16,10 +16,10 @@
             <a href="/member/login">로그인</a>
         </li>
         <li>
-            <a href="/board/boardSave">글쓰기</a>
+            <a href="/product/productList">상품목록</a>
         </li>
         <li>
-            <a href="/board/paging">게시판</a>
+            <a href="#">게시판</a>
         </li>
         <li class="login-name" id="login-area">
         <li class="login-name">

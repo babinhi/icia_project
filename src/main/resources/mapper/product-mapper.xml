@@ -13,5 +13,42 @@
         insert into product_file_table(originalFileName, storedFileName, productId)
         values (#{originalFileName}, #{storedFileName}, #{productId})
     </insert>
+    <select id="findAll" resultType="product">
+        select * from board_table order by boardHits desc
+    </select>
 
+    <select id="paging" parameterType="java.util.HashMap" resultType="product">
+        select * from board_table order by id desc Limit #{start}, #{Limit}
+    </select>
+
+    <select id="count" resultType="Integer">
+        select count(id) from board_table
+    </select>
+
+    <update id="updateHits" parameterType="Long">
+        update board_table set boardHits=boardHits+1 where id=#{id}
+    </update>
+
+    <select id="findById" parameterType="Long" resultType="product">
+        select * from board_table where id=#{id}
+    </select>
+
+    <select id="findFile" parameterType="Long" resultType="productFile">
+        select * from board_file_table where boardId=#{boardId}
+    </select>
+    <update id="update" parameterType="product">
+        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents}
+        where id=#{id}
+    </update>
+    <delete id="delete" parameterType="product">
+        delete from board_table where id=#{id};
+    </delete>
+
+    <select id="search" parameterType="java.util.HashMap" resultType="product">
+        select * from board_table where ${type} like concat('%', #{q}, '%') order by id desc, boardHits desc limit #{start}, #{limit}
+    </select>
+
+    <select id="searchCount" parameterType="java.util.HashMap" resultType="Integer">
+        select count(id) from board_table where ${type} like concat('%', #{q}, '%')
+    </select>
 </mapper>

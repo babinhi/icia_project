@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class MemberService {
@@ -66,5 +67,25 @@ public class MemberService {
         } else {
             return false;
         }
+    }
+
+    public MemberFileDTO findFile(Long id) {
+        return memberRepository.findFile(id);
+    }
+
+    public MemberDTO findById(Long id) {
+        return memberRepository.findById(id);
+    }
+
+    public void update(MemberDTO memberDTO) {
+        memberRepository.update(memberDTO);
+    }
+
+    public void delete(MemberDTO memberDTO) {
+        memberRepository.delete(memberDTO);
+    }
+
+    public List<MemberDTO> findAll() {
+        return memberRepository.findAll();
     }
 }
