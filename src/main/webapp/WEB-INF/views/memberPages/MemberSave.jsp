@@ -187,7 +187,7 @@
         const detailAddress = document.getElementById("sample6_detailAddress").value;
         const extraAddress = document.getElementById("sample6_extraAddress").value;
 
-        const memberAddress = postcode + ", " + address + ", " + detailAddress + ", " + extraAddress;
+        const memberAddress = postcode + "\n" + address + ", " + detailAddress + ", " + extraAddress;
         document.getElementById("memberAddress").value = memberAddress;
 
         if (email.value == "") {

@@ -35,24 +35,24 @@
             </th>
         </tr>
         <tr>
-            <th>id</th>
+            <th>회원번호 : </th>
             <th>${member.id}</th>
         </tr>
         <tr>
-            <th>이름</th>
+            <th>이름    : </th>
             <th>${member.memberName}</th>
         </tr>
         <tr>
-            <th>이메일</th>
+            <th>이메일   : </th>
             <th>${member.memberEmail}</th>
         </tr>
         <tr>
-            <th>비밀번호</th>
+            <th>비밀번호 : </th>
             <th>${member.memberPassword}</th>
         </tr>
         <tr>
-            <th>주소</th>
-            <th>${member.memberaddress}</th>
+            <th>주소    : </th>
+            <th>${member.memberAddress}</th>
         </tr>
     </table>
     <br><br>
