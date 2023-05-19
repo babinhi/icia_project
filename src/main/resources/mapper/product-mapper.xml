@@ -34,7 +34,7 @@
     </select>
 
     <select id="findFile" parameterType="Long" resultType="productFile">
-        select * from product_file_table where memberId=#{memberId}
+        select * from product_file_table where productId=#{productId}
     </select>
     <update id="update" parameterType="product">
         update product_table set productTitle=#{productTitle}, productContents=#{productContents}

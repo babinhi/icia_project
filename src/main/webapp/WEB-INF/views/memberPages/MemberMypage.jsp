@@ -67,17 +67,17 @@
 <script>
     const member_update = () => {
         const id = ${member.id};
-        location.href = "/member/updatePassword?id=" + id;
+        location.href = "/member/UpdatePass?id=" + id;
     }
     const member_delete = () => {
         const id = ${member.id};
         location.href = "/member/PasswordCheck?id=" + id;
     }
-    const board_list = () => {
+    const member_list = () => {
         const type = '${type}';
         const q = '${q}';
         const page = '${page}'
-        location.href = "/board/paging";
+        location.href = "/member/paging";
     }
 
 </script>

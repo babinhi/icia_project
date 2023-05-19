@@ -90,8 +90,24 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/PasswordCheck")
+    @GetMapping("/UpdatePass")
     public String updateForm(HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        return "memberPages/UpdatePassword";
+    }
+
+    @PostMapping("/UpdatePass")
+    public String updatePass(HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+        memberService.update(memberDTO);
+        return "memberPages/MemberUpdate";
+    }
+    @GetMapping("/PasswordCheck")
+    public String deleteForm(HttpSession session, Model model) {
         String loginEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
         model.addAttribute("member", memberDTO);
@@ -99,7 +115,7 @@ public class MemberController {
     }
 
     @PostMapping("/PasswordCheck")
-    public String updatePass(HttpSession session, Model model) {
+    public String deletePass(HttpSession session, Model model) {
         String loginEmail = (String) session.getAttribute("loginEmail");
         MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
         model.addAttribute("member", memberDTO);

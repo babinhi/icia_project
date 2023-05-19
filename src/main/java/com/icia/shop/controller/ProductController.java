@@ -3,6 +3,7 @@ package com.icia.shop.controller;
 import com.icia.shop.dto.MemberDTO;
 import com.icia.shop.dto.PageDTO;
 import com.icia.shop.dto.ProductDTO;
+import com.icia.shop.dto.ProductFileDTO;
 import com.icia.shop.service.InquireService;
 import com.icia.shop.service.MemberService;
 import com.icia.shop.service.ProductService;
@@ -85,5 +86,35 @@ public class ProductController {
         model.addAttribute("q", q);
         model.addAttribute("type", type);
         return "productPages/ProductPaging";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("id") Long id,
+                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         Model model) {
+        //조회수를 1씩 증가시키는 메소드이다
+        productService.updateHits(id);
+        System.out.println(" a id = " + id);
+        ProductDTO productDTO = productService.findById(id);
+        System.out.println(" aqqq productDTO = " + productDTO);
+        model.addAttribute("board", productDTO);
+        model.addAttribute("page", page);
+        System.out.println("야호호호 productDTO = " + productDTO);
+        if (productDTO.getFileAttached() == 1) {
+            // 파일이 있는 게시글을 선택하면
+            List<ProductFileDTO> productFileDTO = productService.findFile(id);
+            model.addAttribute("boardFileList", productFileDTO);
+            System.out.println("boardFileDTO = " + productFileDTO);
+        }
+//        List<CommentDTO> commentDTOList = commentService.findAll(id);
+//        if (commentDTOList.size() == 0) {
+//            //댓글이 없으면 list에 null적용
+//            model.addAttribute("commentList", null);
+//        } else {
+//            //댓글이 있으면 서버에서 가져온 commentDTOList를 넘겨준다
+//            model.addAttribute("commentList", commentDTOList);
+//            System.out.println("야야야commentDTOList = " + commentDTOList);
+//        }
+        return "productPages/ProductDetail";
     }
 }
