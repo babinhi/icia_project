@@ -23,7 +23,6 @@
     <tr>
       <th>글번호</th>
       <th>제목</th>
-      <th>작성자</th>
       <th>내용</th>
       <th>조회수</th>
       <th>작성시간</th>
@@ -33,7 +32,6 @@
       <tr>
         <td>${product.id}</td>
         <td>${product.productTitle}</td>
-        <td>${product.productWriter}</td>
         <td>${product.productContents}</td>
         <td>${product.productHits}</td>
         <td>

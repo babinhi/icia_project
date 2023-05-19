@@ -49,14 +49,14 @@
             <label for="gdsDes">상품소개</label><br>
             <textarea rows="5" cols="50" id="gdsDes" name="productContents"></textarea>
         </div>
-
+        <input type="file" name="productFile" multiple> <br>
         <div class="inputArea">
             <button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
         </div>
         <%--        <input type="text" name="productTitle" placeholder="상품이름"> <br>--%>
         <%--        <input type="text" name="productWriter" value="${sessionScope.loginEmail}" readonly> <br>--%>
         <%--        <textarea name="productContents" cols="30" rows="10" placeholder="상품설명"></textarea> <br>--%>
-        <%--        <input type="file" name="productFile" multiple> <br>--%>
+
         <%--        <input type="submit" value="작성">--%>
     </form>
 </div>

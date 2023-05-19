@@ -50,7 +50,7 @@ public class ProductController {
     @GetMapping("/productList")
     public String productList(Model model) {
         List<ProductDTO> productDTOList = productService.findAll();
-        model.addAttribute("productList", productDTOList);
+        model.addAttribute("productlist", productDTOList);
         return "productPages/ProductList";
     }
 
