@@ -50,6 +50,10 @@
             <th>비밀번호</th>
             <th>${member.memberPassword}</th>
         </tr>
+        <tr>
+            <th>주소</th>
+            <th>${member.memberaddress}</th>
+        </tr>
     </table>
     <br><br>
 
