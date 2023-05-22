@@ -51,6 +51,10 @@
             <th>${member.memberPassword}</th>
         </tr>
         <tr>
+            <th>전화번호 : </th>
+            <th>${member.memberMobile}</th>
+        </tr>
+        <tr>
             <th>주소    : </th>
             <th>${member.memberAddress}</th>
         </tr>

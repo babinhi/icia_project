@@ -26,23 +26,23 @@
         <input type="text" name="memberEmail" value="${sessionScope.loginEmail}" readonly placeholder="이메일"> <br>
         <input type="text" name="memberPassword" id="memberPassword" placeholder="비밀번호"> <br>
         <input type="text" name="memberName" value="${member.memberName}" placeholder="이름"> <br>
-        <input type="text" name="memberMobile" value="${member.memberMobile}" placeholder="전화번호"> <br>
-        <input type="hidden" name="memberAddress" id="memberAddress">
+        <input type="text" id="member-mobile" onblur="mobile_reCheck()" value="${member.memberMobile}" maxlength="11" name="memberMobile" placeholder="전화번호(숫자만입력)"> <br> <br>
+        <input type="hidden" name="memberAddress" id="memberAddress" value="${member.memberAddress}">
         <div style="display: inline-block">
             <input type="text" id="sample6_postcode" placeholder="우편번호"></div>
         <div style="display: inline-block">
             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></div>
         <br>
-
         <input type="text" id="sample6_address" placeholder="주소"><br>
         <div style="display: inline-block">
             <input type="text" id="sample6_detailAddress" placeholder="상세주소">
         </div>
         <div style="display: inline-block">
-            <input type="text" id="sample6_extraAddress" placeholder="참고항목"></div>
-        <br><br><br>
-
-        <input type="button" onclick="update_check()" value="수정">
+            <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+        </div>
+        <br><br>
+        <%--            <input type="submit" onclick="update_check()" value="수정">--%>
+        <input type="submit" value="수정" onclick="member_address()">
     </form>
 </div>
 <%@include file="../componnet/footer.jsp" %>
@@ -60,6 +60,25 @@
             document.updateForm.submit();
         }
     }
+    const mobile_reCheck = () => {
+        const mobile = document.getElementById("member-mobile");
+        const num = mobile.value.replace(/-/g, "");
+        const regex = /(\d{3})(\d{4})(\d{4})/;
+        if (num.length === 11) {
+            mobile.value = num.replace(regex, "$1-$2-$3");
+            return true;
+        }
+    }
+
+    const member_address = () => {
+        const postcode = document.getElementById("sample6_postcode").value;
+        const address = document.getElementById("sample6_address").value;
+        const detailAddress = document.getElementById("sample6_detailAddress").value;
+        const extraAddress = document.getElementById("sample6_extraAddress").value;
+        const memberAddress = postcode + ", " + address + ", " + detailAddress + ", " + extraAddress;
+        document.getElementById("memberAddress").value = memberAddress;
+    }
+
 
     function sample6_execDaumPostcode() {
         new daum.Postcode({
