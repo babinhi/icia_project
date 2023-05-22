@@ -17,6 +17,8 @@ public class ProductDTO {
     private String productTitle;
     private String productWriter;
     private String productContents;
+    private int productPrice;
+    private int productacount;
     private Long memberId;
     private Timestamp productCreatedDate;
     private int productHits;

@@ -43,8 +43,8 @@ public class ProductRepository {
         return sql.selectOne("Product.findById", id);
     }
 
-    public List<ProductFileDTO> findFile(Long productDTO) {
-        return sql.selectList("Product.findFile",productDTO);
+    public List<ProductFileDTO> findFile(Long memberId) {
+        return sql.selectList("Product.findFile", memberId);
     }
 
     public void update(ProductDTO productDTO) {

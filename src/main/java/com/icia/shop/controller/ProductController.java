@@ -91,20 +91,22 @@ public class ProductController {
     @GetMapping("/detail")
     public String detail(@RequestParam("id") Long id,
                          @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
+                         @RequestParam(value = "type",required = false, defaultValue = "productTitle") String type,
                          Model model) {
         //조회수를 1씩 증가시키는 메소드이다
         productService.updateHits(id);
         System.out.println(" a id = " + id);
         ProductDTO productDTO = productService.findById(id);
         System.out.println(" aqqq productDTO = " + productDTO);
-        model.addAttribute("board", productDTO);
+        model.addAttribute("product", productDTO);
         model.addAttribute("page", page);
         System.out.println("야호호호 productDTO = " + productDTO);
         if (productDTO.getFileAttached() == 1) {
             // 파일이 있는 게시글을 선택하면
             List<ProductFileDTO> productFileDTO = productService.findFile(id);
-            model.addAttribute("boardFileList", productFileDTO);
-            System.out.println("boardFileDTO = " + productFileDTO);
+            model.addAttribute("productFileList", productFileDTO);
+            System.out.println("productFileDTO = " + productFileDTO);
         }
 //        List<CommentDTO> commentDTOList = commentService.findAll(id);
 //        if (commentDTOList.size() == 0) {
