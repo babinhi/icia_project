@@ -22,32 +22,29 @@
             <label>1차 분류</label>
             <select class="category1">
                 <option value="">전체</option>
-            </select>
-
-            <label>2차 분류</label>
-            <select class="category2" name="cateCode">
-                <option value="">전체</option>
+                <option value="">원두</option>
+                <option value="">용품</option>
             </select>
         </div>
 
         <div class="inputArea">
-            <label for="gdsName">상품명</label>
-            <input type="text" id="gdsName" name="productTitle"/>
+            <label for="productTitle">상품명</label>
+            <input type="text" id="productTitle" name="productTitle"/>
         </div>
 
         <div class="inputArea">
-            <label for="gdsPrice">상품가격</label>
-            <input type="text" id="gdsPrice" name="productPrice"/>
+            <label for="productPrice">상품가격</label>
+            <input type="text" id="productPrice" name="productPrice"/>
         </div>
 
         <div class="inputArea">
-            <label for="gdsStock">상품수량</label>
-            <input type="text" id="gdsStock" name="productStock"/>
+            <label for="productQuantity">상품수량</label>
+            <input type="text" id="productQuantity" name="productQuantity"/>
         </div>
 
         <div class="inputArea">
-            <label for="gdsDes">상품소개</label><br>
-            <textarea rows="5" cols="50" id="gdsDes" name="productContents"></textarea>
+            <label for="productContents">상품소개</label><br>
+            <textarea rows="5" cols="50" id="productContents" name="productContents"></textarea>
         </div>
         <input type="file" name="productFile" multiple> <br>
         <div class="inputArea">

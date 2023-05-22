@@ -12,15 +12,24 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/main.css">
-<%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">--%>
+    <%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">--%>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 </head>
+<style>
+
+</style>
 <body>
 <%@include file="../componnet/header.jsp" %>
 <%@include file="../componnet/nav.jsp" %>
 <div id="section">
+    <div class="login-name">
+        <c:if test="${sessionScope.loginEmail == 'admin'}">
+            <button onclick="product_update('${product.id}')">수정</button>
+            <button onclick="product_delete('${product.id}')">삭제</button>
+        </c:if>
+    </div>
     <h2>상세조회</h2>
     <table>
         <tr>
@@ -48,7 +57,7 @@
         </tr>
         <tr>
             <th>남은 갯수</th>
-            <td>${product.productacount}</td>
+            <td>${product.productQuantity}</td>
         </tr>
         <tr>
             <th>상품소개</th>
@@ -66,9 +75,9 @@
         </tr>
 
     </table>
-    <button onclick="product_update('${product.id}')">수정</button>
-    <button onclick="product_delete('${product.id}')">삭제</button>
+
     <button onclick="product_list()">목록</button>
+
 
     <br><br>
     <h2>──────────────────────────────────────────────────────────────────────────────────────────────</h2> <br><br>
@@ -111,12 +120,12 @@
 </body>
 <script>
     const product_update = () => {
-        const id ='${product.id}';
+        const id = '${product.id}';
         location.href = "/product/update?id=" + id;
     }
     const product_delete = () => {
-        const id ='${product.id}';
-        location.href = "/product/delete-check?id=" + id;
+        const id = '${product.id}';
+        location.href = "/product/DeletePass?id=" + id;
     }
     const product_list = () => {
         const type = '${type}';

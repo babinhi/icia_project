@@ -8,14 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Title</title>
-  <link rel="stylesheet" href="/resources/css/main.css">
-  <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
-<%@include file="../componnet/header.jsp" %>
-<%@include file="../componnet/nav.jsp" %>
-
-<%@include file="../componnet/footer.jsp" %>
+<script>
+    alert("회원 탈퇴 되었습니다. 그동안 이용해 주셔서 감사합니다");
+    location.href="/member/logout";
+</script>
 </body>
+
 </html>

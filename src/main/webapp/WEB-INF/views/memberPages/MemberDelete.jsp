@@ -16,6 +16,6 @@
 </body>
 <script>
   alert("회원탈퇴 되셨습니다");
-  location.href="/member/logout";
+  location.href="/";
 </script>
 </html>

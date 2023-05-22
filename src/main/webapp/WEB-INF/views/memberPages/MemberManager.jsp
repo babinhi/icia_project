@@ -33,7 +33,7 @@
         <td>${member.id}</td>
         <td>${member.memberEmail}</td>
         <td>${member.memberName}</td>
-        <td>${member.memberaddress}</td>
+        <td>${member.memberAddress}</td>
         <td>${member.memberMobile}</td>
         <td>
           <button onclick="manager('${member.id}')">회원삭제</button>

@@ -119,4 +119,31 @@ public class ProductController {
 //        }
         return "productPages/ProductDetail";
     }
+    @GetMapping("/update")
+    public String updateForm(@RequestParam("id") Long id, Model model) {
+        ProductDTO productDTO = productService.findById(id);
+        System.out.println("여긴 컨트롤러 productDTO = " + productDTO);
+        model.addAttribute("product", productDTO);
+        return "productPages/ProductUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute ProductDTO productDTO, Model model) {
+        productService.update(productDTO);
+        ProductDTO dto = productService.findById(productDTO.getId());
+        model.addAttribute("product", dto);
+        return "productPages/ProductDetail";
+    }
+//    @GetMapping("/DeletePass")
+//    public String deleteCheck(@RequestParam("id") Long id, Model model) {
+//        ProductDTO productDTO = productService.findById(id);
+//        model.addAttribute("board", productDTO);
+//        return "productPages/DeleteCheck";
+//    }
+
+    @GetMapping("/DeletePass")
+    public String delete(@RequestParam("id") Long id) {
+        productService.delete(id);
+        return "redirect:/";
+    }
 }

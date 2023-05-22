@@ -40,6 +40,7 @@ public class ProductRepository {
     }
 
     public ProductDTO findById(Long id) {
+        System.out.println("레포짓 id = " + id);
         return sql.selectOne("Product.findById", id);
     }
 
@@ -51,8 +52,8 @@ public class ProductRepository {
         sql.update("Product.update", productDTO);
     }
 
-    public void delete(ProductDTO productDTO) {
-        sql.delete("Product.delete",productDTO);
+    public void delete(Long id) {
+        sql.delete("Product.delete",id);
     }
 
     public List<ProductDTO> searchList(Map<String, Object> pagingParams) {

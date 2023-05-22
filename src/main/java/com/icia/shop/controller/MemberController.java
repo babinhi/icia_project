@@ -58,9 +58,15 @@ public class MemberController {
         }
     }
 
+//    @GetMapping("/logout")
+//    public String logout(HttpSession session) {
+//        session.removeAttribute("loginEmail");
+//        return "redirect:/";
+//    }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("loginEmail");
+        // 세션에 담긴 값 전체 삭제
+        session.invalidate();
         return "redirect:/";
     }
 
@@ -123,19 +129,19 @@ public class MemberController {
         return "memberPages/MemberDelete";
     }
 
-    @GetMapping("/manager")
+    @GetMapping("/managerPage")
     public String managerForm(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         System.out.println("넘어오나 체크 memberDTOList = " + memberDTOList);
         model.addAttribute("memberList", memberDTOList);
-        return "memberPages/ManagerPage";
+        return "memberPages/MemberManager";
     }
 
     @GetMapping("/memberDelete")
     public String deleteManager(@ModelAttribute MemberDTO memberDTO) {
         System.out.println("체크용 memberDTO = " + memberDTO);
         memberService.delete(memberDTO);
-        return "redirect:manager";
+        return "memberPages/MemberDelete";
     }
 
 }

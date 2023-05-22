@@ -4,43 +4,28 @@
 
 
 
-<div id="nav" >
-    <ul>
-        <li>
-            <a href="/">메인으로</a>
-        </li>
-        <li>
-            <a href="/member/save">회원가입</a>
-        </li>
-        <li>
-            <a href="/member/login">로그인</a>
-        </li>
-        <li>
-            <a href="/product/productList">상품목록</a>
-        </li>
-        <li>
-            <a href="#">게시판</a>
-        </li>
-        <li class="login-name" id="login-area">
-        <li class="login-name">
-            <c:choose>
-                <c:when test="${sessionScope.loginEmail != null}">
-                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}" style="color: black;">${sessionScope.loginEmail} 님</a>
-                    <a href="/member/logout">logout</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="/member/login">login</a>
-                </c:otherwise>
-            </c:choose>
-        </li>
-        <li class="login-name">
-            <c:if test="${sessionScope.loginEmail == 'admin'}">
-                <a href="/member/manager">회원리스트</a>
-                <a href="/product/Productsave" class="left1">상품등록</a>
-            </c:if>
-        </li>
-        </li>
-    </ul>
+<div id="container">
+<ul class="myMenu">
+    <li class="menu1">메뉴</li>
+    <li class="menu2">
+        메뉴 2
+        <ul class="menu2_s submenu">
+            <li><a href="/product/productList">원두</a></li>
+            <li><a href="#">커피용품</a></li>
+            <li><a href="#">잔</a></li>
+        </ul>
+    </li>
+    <li class="menu3">
+        메뉴 3
+        <ul class="menu3_s submenu">
+            <li>메뉴 3-1</li>
+            <li>메뉴 3-2</li>
+            <li>메뉴 3-3</li>
+        </ul>
+    </li>
+    <li class="menu4">메뉴 4</li>
+    <li class="menu5">메뉴 5</li>
+</ul>
 </div>
 
 <%--<script>--%>

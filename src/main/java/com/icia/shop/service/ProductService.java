@@ -123,6 +123,7 @@ public class ProductService {
     }
 
     public ProductDTO findById(Long id) {
+        System.out.println(" 여긴 서비스 id = " + id);
         return productRepository.findById(id);
     }
 
@@ -134,8 +135,8 @@ public class ProductService {
         productRepository.update(productDTO);
     }
 
-    public void delete(ProductDTO productDTO) {
-        productRepository.delete(productDTO);
+    public void delete(Long id) {
+        productRepository.delete(id);
     }
 
     public List<ProductDTO> searchList(int page, String type, String q) {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+<div id="section">
+    <br><br>
+    <div class="container row-3" id="search-area">
+        <%-- 검색어는 보통 노출이 되니깐 get --%>
+
+        <form action="/product/paging" method="get">
+            <div style="display: inline-block">
+                <select name="type">
+                    <option value="productTitle">제목</option>
+                </select>
+            </div>
+
+            <div style="display: inline-block">
+                <input type="text" name="q" placeholder="검색어를 입력하세요">
+            </div>
+            <div style="display: inline-block">
+                <input type="submit" value="검색">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

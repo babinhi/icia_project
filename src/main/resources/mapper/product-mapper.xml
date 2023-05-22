@@ -5,8 +5,8 @@
 
 <mapper namespace="Product">
     <insert id="save" parameterType="product" useGeneratedKeys="true" keyProperty="id">
-        insert into product_table(memberId, productTitle, productContents, fileAttached)
-        values(#{memberId}, #{productTitle}, #{productContents} ,#{fileAttached})
+        insert into product_table(memberId, productTitle, productContents, productPrice, productQuantity, fileAttached)
+        values(#{memberId}, #{productTitle}, #{productContents}, #{productPrice}, #{productQuantity}, #{fileAttached})
     </insert>
 
     <insert id="saveFile" parameterType="productFile">
@@ -37,8 +37,12 @@
         select * from product_file_table where productId=#{productId}
     </select>
     <update id="update" parameterType="product">
-        update product_table set productTitle=#{productTitle}, productContents=#{productContents}
-        where id=#{id}
+        update product_table
+        set productTitle=#{productTitle},
+            productContents=#{productContents},
+            productPrice=#{productPrice},
+            productQuantity=#{productQuantity}
+        where id = #{id}
     </update>
     <delete id="delete" parameterType="product">
         delete from product_table where id=#{id};
