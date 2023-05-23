@@ -15,15 +15,21 @@
     <link rel="stylesheet" href="/resources/css/main.css">
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
+<style>
+    #list {
+        margin: 20px;
+        padding: 20px;
+    }
+</style>
 <body>
 <%@include file="../componnet/header.jsp" %>
 <%@include file="../componnet/nav.jsp" %>
-<div id="section">
+<div id="section" style="margin: 20px">
     <br><br>
     <div class="container row-3" id="search-area">
         <%-- 검색어는 보통 노출이 되니깐 get --%>
 
-        <form action="/product/paging" method="get">
+        <form action="/product/paging" method="get" enctype="multipart/form-data">
             <div style="display: inline-block">
                 <select name="type">
                     <option value="productTitle">제목</option>
@@ -38,33 +44,27 @@
             </div>
         </form>
     </div>
-</div>
-<div class="container" id="list">
-    <table class="table table-striped table-hover text-center">
-        <tr>
-            <th>상품번호</th>
-            <th>상품명</th>
-            <th>내용</th>
-            <th>조회수</th>
-            <th>등록일자</th>
-
-
-        </tr>
+    <div class="container rounded-3" id="list">
+        <table class="table table-striped table-hover text-center">
         <c:forEach items="${productList}" var="product">
-            <tr>
-                <td>${product.id}</td>
-                <td>
-                    <a href="/product/detail?id=+${product.id}&page=${paging.page}&q=${q}&type=${type}"> ${product.productTitle}</a>
-                </td>
-                <td>${product.productContents}</td>
-                <td>${product.productHits}</td>
-                <td>
-                    <fmt:formatDate value="${product.productCreatedDate}"
-                                    pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
-                </td>
-            </tr>
-        </c:forEach>
+        <div class="card" style="flex: 1; display: inline-block; margin-top: 10px; margin-left: 10px">
+            <c:if test="${product.fileAttached == 1}">
+                <a href="/product/detail?id=+${product.id}&page=${paging.page}&q=${q}&type=${type}">
+                    <img src="${pageContext.request.contextPath}/upload/${product.storedFileName}" width="150"
+                         height="150" style="display: inline-block; margin-top: 10px; margin-left: 10px"></a>
+            </c:if></div>
+        <div style="display: inline-block; margin-top: 10px; margin-left: 10px">
+            상품이름: <a
+                href="/product/detail?id=+${product.id}&page=${paging.page}&q=${q}&type=${type}"> ${product.productTitle}</a>
+            <p class="price">상품가격 : ${String.format("%,d", product.productPrice)}원</p>
+            <p> 상품 설명: ${product.productContents}</p>
+        </div>
+        <br>
+
+    </div>
+    </c:forEach>
     </table>
+</div>
 </div>
 <br>
 <div class="container">
@@ -140,3 +140,4 @@
 <%@include file="../componnet/footer.jsp" %>
 </body>
 </html>
+

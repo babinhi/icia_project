@@ -8,5 +8,6 @@
         <typeAlias type="com.icia.shop.dto.MemberFileDTO" alias="memberFile"></typeAlias>
         <typeAlias type="com.icia.shop.dto.ProductDTO" alias="product"></typeAlias>
         <typeAlias type="com.icia.shop.dto.ProductFileDTO" alias="productFile"></typeAlias>
+        <typeAlias type="com.icia.shop.dto.ImgesDTO" alias="productImg"></typeAlias>
     </typeAliases>
 </configuration>

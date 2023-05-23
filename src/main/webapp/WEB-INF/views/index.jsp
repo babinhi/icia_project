@@ -22,6 +22,7 @@
 <a href="/product/productSave">상품등록</a>
 <a href="/product/paging">상품리스트</a>
 <a href="/order/cart">장바구니</a>
+<a href="/product/list">이미지까지 있는 상품조회</a>
 <%@include file="componnet/footer.jsp"%>
 </body>
 </html>

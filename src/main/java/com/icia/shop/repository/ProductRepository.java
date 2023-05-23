@@ -57,7 +57,7 @@ public class ProductRepository {
     }
 
     public List<ProductDTO> searchList(Map<String, Object> pagingParams) {
-        return sql.selectList("Product.search", pagingParams);
+        return sql.selectList("Product.searchList", pagingParams);
     }
 
     public int productSearchCount(Map<String, Object> pagingParams) {

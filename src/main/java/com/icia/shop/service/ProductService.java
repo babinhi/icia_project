@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -46,6 +47,7 @@ public class ProductService {
                 String originalFilename = productFile.getOriginalFilename();
                 System.out.println("originalFilename = " + originalFilename);
 
+
                 // 저장용 이름 만들기
 
                 String storedFileName = System.currentTimeMillis() + "-" + originalFilename;
@@ -62,7 +64,6 @@ public class ProductService {
                 //어디(큰따옴표안에 쓴곳)에 어떤 이름(storedFileName)으로 저장할지 경로를 만들어줌
                 // 큰따옴표 안에 젤 뒤에 백슬래시(\\) 두개 추가 필수 꼮꼮꼮꼬꼮ㄲ!!
                 String savePath = "D:\\springframework_img\\" + storedFileName;
-
                 //저장처리
                 // 리스트에 담겨있는데 for문으로 접근하고있으므로 각각 첨부파일로 접근함
                 productFile.transferTo(new File(savePath));

@@ -77,6 +77,9 @@
     </table>
 
     <button onclick="product_list()">목록</button>
+    <button class="btn btn-default btn-order">주문하기</button>
+    <button class="btn btn-default btn-cart">장바구니</button>
+    <button class="btn btn-default btn-wishlist">위시리스트</button>
 
 
     <br><br>
@@ -133,6 +136,38 @@
         const page = '${page}'
         location.href = "/product/paging?page=" + page + "&type=" + type + "&q=" + q;
     }
+    $(".btn-order").click(function () {
+        location.assign("/order/cart");
+    });
+
+    $(".btn-cart").click(function() {
+
+        $.ajax({
+
+            type : "post",
+            url : "/order/cart/" + productId,
+            data : {
+                productId : productId
+            },
+            dataType : "text",
+            success : function(result) {
+
+                if (result.trim() == 'add_success') {
+                    var check = confirm("카트에 등록되었습니다.");
+                    if (check) {
+                        location.assign("/order/mycart/" + userid);
+                    }
+                } else if (result.trim() == 'already_existed') {
+                    alert("이미 카트에 등록된 상품입니다.");
+                }
+            }
+        });
+    });
+
+    $(".btn-wishlist").click(function () {
+        alert("상품을 위시리스트에 추가하였습니다.");
+    });
+
     <%--const comment_write = () => {--%>
     <%--    const commentWriter = document.getElementById("comment-writer").value;--%>
     <%--    const commentContents = document.getElementById("comment-contents").value;--%>
