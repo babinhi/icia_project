@@ -51,13 +51,15 @@
             <c:if test="${product.fileAttached == 1}">
                 <a href="/product/detail?id=+${product.id}&page=${paging.page}&q=${q}&type=${type}">
                     <img src="${pageContext.request.contextPath}/upload/${product.storedFileName}" width="150"
-                         height="150" style="display: inline-block; margin-top: 10px; margin-left: 10px"></a>
+                         height="150" class="rounded-3" style="display: inline-block;"></a>
             </c:if></div>
+
         <div style="display: inline-block; margin-top: 10px; margin-left: 10px">
+            <p></p>
             상품이름: <a
                 href="/product/detail?id=+${product.id}&page=${paging.page}&q=${q}&type=${type}"> ${product.productTitle}</a>
-            <p class="price">상품가격 : ${String.format("%,d", product.productPrice)}원</p>
-            <p> 상품 설명: ${product.productContents}</p>
+            <p class="price" style="margin-top: 10px; margin-left: 10px" >상품가격 : ${String.format("%,d", product.productPrice)}원</p>
+            <p  style="margin-top: 10px; margin-left: 10px"> 상품 설명: ${product.productContents}</p>
         </div>
         <br>
 

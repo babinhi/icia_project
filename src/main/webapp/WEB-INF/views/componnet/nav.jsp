@@ -5,27 +5,27 @@
 
 
 <div id="container">
-<ul class="myMenu">
-    <li class="menu1">메뉴</li>
-    <li class="menu2">
-        메뉴 2
-        <ul class="menu2_s submenu">
-            <li><a href="/product/productList">원두</a></li>
-            <li><a href="#">커피용품</a></li>
-            <li><a href="#">잔</a></li>
-        </ul>
-    </li>
-    <li class="menu3">
-        메뉴 3
-        <ul class="menu3_s submenu">
-            <li>메뉴 3-1</li>
-            <li>메뉴 3-2</li>
-            <li>메뉴 3-3</li>
-        </ul>
-    </li>
-    <li class="menu4">메뉴 4</li>
-    <li class="menu5">메뉴 5</li>
-</ul>
+    <ul class="myMenu">
+        <li class="menu1">메뉴</li>
+        <li class="menu2">
+            메뉴 2
+            <ul class="menu2_s submenu">
+                <li><a href="/product/productList">원두</a></li>
+                <li><a href="#">커피용품</a></li>
+                <li><a href="#">잔</a></li>
+            </ul>
+        </li>
+        <li class="menu3">
+            메뉴 3
+            <ul class="menu3_s submenu">
+                <li>메뉴 3-1</li>
+                <li>메뉴 3-2</li>
+                <li>메뉴 3-3</li>
+            </ul>
+        </li>
+        <li class="menu4">메뉴 4</li>
+        <li class="menu5">메뉴 5</li>
+    </ul>
 </div>
 
 <%--<script>--%>
