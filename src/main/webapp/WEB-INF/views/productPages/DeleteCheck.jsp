@@ -17,22 +17,25 @@
 <%@include file="../componnet/nav.jsp" %>
 <div id="section">
   <form action="/product/DeletePass" method="post" name="deleteForm">
-    <input type="text" name="memberPassword" id="memberPassword" placeholder="현재 비밀번호를 입력해주세요">
+    <input type="text" id="memberPassword" placeholder="삭제확인 비밀번호를 입력해주세요">
     <input type="button" onclick="pass_check()" value="비밀번호 확인">
   </form>
 </div>
 <%@include file="../componnet/footer.jsp" %>
 </body>
 <script>
-  // 비밀번호 확인 메소드
   const pass_check = () => {
-    //  확인할 비밀번호
+    // 확인할 비밀번호
     const inputPass = document.getElementById("memberPassword").value;
-    // 서버에 저장되있는 비밀번호
-    const DBPass = '${member.memberPassword}';
-    if (inputPass == DBPass) {
-      document.deleteForm.submit();
+    // 서버에 저장되어 있는 비밀번호
+
+    if (inputPass === '0000') {
+      // 비밀번호 일치
+      if (confirm("게시글을 삭제하시겠습니까?")) {
+        document.deleteForm.submit();
+      }
     } else {
+      // 비밀번호 불일치
       alert("비밀번호가 일치하지 않습니다! 다시 입력해주세요");
     }
   }

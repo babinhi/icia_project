@@ -12,7 +12,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/main.css">
-    <%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
@@ -23,13 +23,16 @@
 <body>
 <%@include file="../componnet/header.jsp" %>
 <%@include file="../componnet/nav.jsp" %>
-<div id="section">
-    <div class="login-name">
+<div id="section" class="table table-striped table-hover text-center">
+    <div class="login-name" style="float: left">
         <c:if test="${sessionScope.loginEmail == 'admin'}">
-            <button onclick="product_update('${product.id}')">수정</button>
-            <button onclick="product_delete('${product.id}')">삭제</button>
+            <button class="btn btn-default btn-update" data-id="${product.id}">수정하기</button>
+            <form action="/product/DeletePass" method="post" name="deleteForm">
+                <input type="button" onclick="pass_check()" value="게시글 삭제">
+            </form>
         </c:if>
     </div>
+    <br><br>
     <h2>상세조회</h2>
     <table>
         <tr>
@@ -53,7 +56,7 @@
         </tr>
         <tr>
             <th>상품가격</th>
-            <td>${product.productPrice}</td>
+            <td>${String.format("%,d", product.productPrice)}원</td>
         </tr>
         <tr>
             <th>남은 갯수</th>
@@ -75,12 +78,14 @@
         </tr>
 
     </table>
-
-    <button onclick="product_list()">목록</button>
-    <button class="btn btn-default btn-order">주문하기</button>
-    <button class="btn btn-default btn-cart">장바구니</button>
-    <button class="btn btn-default btn-wishlist">위시리스트</button>
-
+    <br><br><br>
+    <div style="float: left">
+        <%--    <button onclick="product_list()">목록</button>--%>
+        <button class="btn btn-default btn-list">목록</button>
+        <button class="btn btn-default btn-order">주문하기</button>
+        <button class="btn btn-default btn-cart">장바구니</button>
+        <button class="btn btn-default btn-wishlist">위시리스트</button>
+    </div>
 
     <br><br>
     <h2>──────────────────────────────────────────────────────────────────────────────────────────────</h2> <br><br>
@@ -122,35 +127,60 @@
     <%@include file="../componnet/footer.jsp" %>
 </body>
 <script>
-    const product_update = () => {
+    <%--const product_update = () => {--%>
+    <%--    const id = '${product.id}';--%>
+    <%--    location.href = "/product/update?id=" + id;--%>
+    <%--}--%>
+    <%--const product_delete = () => {--%>
+    <%--    const id = '${product.id}';--%>
+    <%--    location.href = "/product/DeletePass?id=" + id;--%>
+    <%--}--%>
+    <%--const product_list = () => {--%>
+    <%--    const type = '${type}';--%>
+    <%--    const q = '${q}';--%>
+    <%--    const page = '${page}'--%>
+    <%--    location.href = "/product/paging?page=" + page + "&type=" + type + "&q=" + q;--%>
+    <%--}--%>
+    $(".btn-update").click(function () {
         const id = '${product.id}';
-        location.href = "/product/update?id=" + id;
+        location.assign("/product/update?id=" + id);
+    });
+
+    <%--$(".btn-delete").click(function () {--%>
+    <%--    const id = '${product.id}';--%>
+    <%--    location.assign("/product/DeletePass?id=" + id);--%>
+    <%--});--%>
+    const pass_check = () => {
+        const confirmResult = confirm("게시글을 삭제하시겠습니까?");
+        if (confirmResult) {
+            const id = '${product.id}';
+            location.assign("/product/DeletePass?id=" + id);
+        } else {
+            alert("게시글 삭제를 취소했습니다.");
+        }
     }
-    const product_delete = () => {
-        const id = '${product.id}';
-        location.href = "/product/DeletePass?id=" + id;
-    }
-    const product_list = () => {
+    $(".btn-list").click(function () {
         const type = '${type}';
         const q = '${q}';
-        const page = '${page}'
-        location.href = "/product/paging?page=" + page + "&type=" + type + "&q=" + q;
-    }
+        const page = '${page}';
+        location.assign("/product/paging?page=" + page + "&type=" + type + "&q=" + q);
+    });
+
     $(".btn-order").click(function () {
         location.assign("/order/cart");
     });
 
-    $(".btn-cart").click(function() {
+    $(".btn-cart").click(function () {
 
         $.ajax({
 
-            type : "post",
-            url : "/order/cart/" + productId,
-            data : {
-                productId : productId
+            type: "post",
+            url: "/order/cart/" + productId,
+            data: {
+                productId: productId
             },
-            dataType : "text",
-            success : function(result) {
+            dataType: "text",
+            success: function (result) {
 
                 if (result.trim() == 'add_success') {
                     var check = confirm("카트에 등록되었습니다.");

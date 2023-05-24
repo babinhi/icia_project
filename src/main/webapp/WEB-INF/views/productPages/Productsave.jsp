@@ -41,7 +41,6 @@
             <label for="productQuantity">상품수량</label>
             <input type="text" id="productQuantity" name="productQuantity"/>
         </div>
-
         <div class="inputArea">
             <label for="productContents">상품소개</label><br>
             <textarea rows="5" cols="50" id="productContents" name="productContents"></textarea>

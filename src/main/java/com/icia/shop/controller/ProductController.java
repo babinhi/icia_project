@@ -143,8 +143,17 @@ public class ProductController {
 //    }
 
     @GetMapping("/DeletePass")
-    public String delete(@RequestParam("id") Long id) {
+    public String deleteFrom(@RequestParam("id") Long id) {
+        ProductDTO productDTO = productService.findById(id);
+        System.out.println("여긴 컨트롤러 productDTO = " + productDTO);
         productService.delete(id);
         return "redirect:/";
     }
+//    @PostMapping("/DeletePass")
+//    public String delete(@RequestParam("id") Long id, Model model) {
+//        ProductDTO dto = productService.findById(id);
+//        model.addAttribute("product", dto);
+//        productService.delete(id);
+//        return "productPages/ProductDetail";
+//    }
 }

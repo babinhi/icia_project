@@ -14,8 +14,8 @@
 </head>
 <body>
 <script>
-    alert("회원 탈퇴 되었습니다. 그동안 이용해 주셔서 감사합니다");
-    location.href="/member/logout";
+    alert("게시글이 삭제되었습니다");
+    location.href="/product/paging";
 </script>
 </body>
 
