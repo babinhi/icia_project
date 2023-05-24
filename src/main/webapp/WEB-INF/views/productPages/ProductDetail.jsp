@@ -23,7 +23,7 @@
 <body>
 <%@include file="../componnet/header.jsp" %>
 <%@include file="../componnet/nav.jsp" %>
-<div id="section" class="table table-striped table-hover text-center">
+<div id="section" class="table table-striped table-hover text-center rounded-3">
     <div class="login-name" style="float: left">
         <c:if test="${sessionScope.loginEmail == 'admin'}">
             <button class="btn btn-default btn-update" data-id="${product.id}">수정하기</button>
@@ -33,57 +33,72 @@
         </c:if>
     </div>
     <br><br>
-    <h2>상세조회</h2>
-    <table>
+    <h2>상품 상세정보</h2>
+    <table style="border: 1px">
         <tr>
-            <th>상품번호</th>
-            <td>${product.id}</td>
-        </tr>
-        <tr>
-            <th>이미지</th>
-            <td>
+            <td style="text-align: center; width: 50%;">
                 <c:forEach items="${productFileList}" var="productFile">
-                    <c:if test="${product.fileAttached ==1 }">
+                    <c:if test="${product.fileAttached == 1}">
                         <img src="${pageContext.request.contextPath}/upload/${productFile.storedFileName}"
-                             alt="" width="150" height="150">
+                             style="max-width: 100%; max-height: 300px;">
                     </c:if>
                 </c:forEach>
             </td>
-        </tr>
-        <tr>
-            <th>상품명</th>
-            <td>${product.productTitle}</td>
-        </tr>
-        <tr>
-            <th>상품가격</th>
-            <td>${String.format("%,d", product.productPrice)}원</td>
-        </tr>
-        <tr>
-            <th>남은 갯수</th>
-            <td>${product.productQuantity}</td>
-        </tr>
-        <tr>
-            <th>상품소개</th>
-            <td>${product.productContents}</td>
-        </tr>
-        <tr>
-            <th>작성시간</th>
-            <td>
-                <fmt:formatDate value="${product.productCreatedDate}" pattern="yyyy-MM-dd hh:mm:ss"></fmt:formatDate>
+            <td style="vertical-align: top; width: 50%;">
+                <table style="width: 100%;">
+                    <tr style="text-align: center;">
+                        <th>상품번호</th>
+                        <td>${product.id}</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>상품명</th>
+                        <td>${product.productTitle}</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>상품가격</th>
+                        <td>${String.format("%,d", product.productPrice)}원</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>남은 갯수</th>
+                        <td>${product.productQuantity}</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>상품소개</th>
+                        <td>${product.productContents}</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>작성시간</th>
+                        <td>
+                            <fmt:formatDate value="${product.productCreatedDate}"
+                                            pattern="yyyy-MM-dd"></fmt:formatDate>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>조회수</th>
+                        <td>${product.productHits}</td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td colspan="2">
+                            <form name="form1" method="post">
+                                <input>
+                            </form>
+                        </td>
+                        <td><button class="btn btn-default btn-order">주문하기</button></td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <th>퓨퓨퓨</th>
+                       <td><button class="btn btn-default btn-cart">장바구니</button></td>
+                    </tr>
+                </table>
             </td>
         </tr>
-        <tr>
-            <th>조회수</th>
-            <td>${product.productHits}</td>
-        </tr>
-
     </table>
-    <br><br><br>
+    <br><br>
     <div style="float: left">
         <%--    <button onclick="product_list()">목록</button>--%>
         <button class="btn btn-default btn-list">목록</button>
-        <button class="btn btn-default btn-order">주문하기</button>
-        <button class="btn btn-default btn-cart">장바구니</button>
+
+
         <button class="btn btn-default btn-wishlist">위시리스트</button>
     </div>
 
@@ -171,31 +186,31 @@
     });
 
     $(".btn-cart").click(function () {
+        var productId = $(this).data('id'); // productId를 가져옵니다.
 
         $.ajax({
-
-            type: "post",
-            url: "/order/cart/" + productId,
+            type: "POST",
+            url: "/order/cart/add",
             data: {
                 productId: productId
             },
             dataType: "text",
             success: function (result) {
-
-                if (result.trim() == 'add_success') {
+                if (result.trim() === 'add_success') {
                     var check = confirm("카트에 등록되었습니다.");
                     if (check) {
-                        location.assign("/order/mycart/" + userid);
+                        var memberId = "{{memberId}}"; // 적절한 유저 아이디 값을 가져와서 사용합니다. 수정이 필요합니다.
+                        location.assign("/order/mycart/" + memberId);
                     }
-                } else if (result.trim() == 'already_existed') {
+                } else if (result.trim() === 'already_existed') {
                     alert("이미 카트에 등록된 상품입니다.");
                 }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                alert("카트 등록 중 오류가 발생했습니다.");
             }
         });
-    });
-
-    $(".btn-wishlist").click(function () {
-        alert("상품을 위시리스트에 추가하였습니다.");
     });
 
     <%--const comment_write = () => {--%>
