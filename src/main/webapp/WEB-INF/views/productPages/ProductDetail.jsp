@@ -34,7 +34,7 @@
     </div>
     <br><br>
     <h2>상품 상세정보</h2>
-    <table style="border: 1px">
+    <table class="container">
         <tr>
             <td style="text-align: center; width: 50%;">
                 <c:forEach items="${productFileList}" var="productFile">
@@ -79,16 +79,23 @@
                     </tr>
                     <tr style="text-align: center">
                         <td colspan="2">
-                            <form name="form1" method="post">
-                                <input>
+                            <form name="form1" method="post" onsubmit="return submitForm('${product.id}')">
+                                <input type="hidden" name="id" value="${product.id}">
+                                <select name="amount">
+                                    <c:forEach begin="1" end="10" var="i">
+                                        <option value="${i}">${i}</option>
+                                    </c:forEach>
+                                </select>&nbsp;개
+                                <button class="btn btn-default btn-cart">   장바구니에 담기</button>
                             </form>
                         </td>
-                        <td><button class="btn btn-default btn-order">주문하기</button></td>
                     </tr>
-                    <tr style="text-align: center">
-                        <th>퓨퓨퓨</th>
-                       <td><button class="btn btn-default btn-cart">장바구니</button></td>
+                    <tr>
+                        <td>
+                            <button class="btn btn-default btn-order">주문하기</button>
+                        </td>
                     </tr>
+
                 </table>
             </td>
         </tr>
