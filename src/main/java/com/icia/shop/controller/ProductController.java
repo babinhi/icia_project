@@ -60,7 +60,7 @@ public class ProductController {
     public String paging(
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
             @RequestParam(value = "q", required = false, defaultValue = "") String q,
-            @RequestParam(value = "type", required = false, defaultValue = "boardTitle") String type,
+            @RequestParam(value = "type", required = false, defaultValue = "productTitle") String type,
             Model model) {
         System.out.println("페이징 page = " + page + ", q = " + q + ",type= " + type);
         List<ProductDTO> productDTOList = null;
@@ -147,7 +147,7 @@ public class ProductController {
         ProductDTO productDTO = productService.findById(id);
         System.out.println("여긴 컨트롤러 productDTO = " + productDTO);
         productService.delete(id);
-        return "redirect:/";
+        return "productPages/ProductDelete";
     }
 //    @PostMapping("/DeletePass")
 //    public String delete(@RequestParam("id") Long id, Model model) {
