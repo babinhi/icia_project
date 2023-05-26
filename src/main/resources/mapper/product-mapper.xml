@@ -86,4 +86,7 @@
         from product_table
         where ${type} like concat('%', #{q}, '%')
     </select>
+    <select id="findByMemberEmail" parameterType="String" resultType="product">
+        select * from smember_table where memberEmail = #{memberEmail}
+    </select>
 </mapper>

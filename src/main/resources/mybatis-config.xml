@@ -10,5 +10,6 @@
         <typeAlias type="com.icia.shop.dto.ProductFileDTO" alias="productFile"></typeAlias>
         <typeAlias type="com.icia.shop.dto.ImgesDTO" alias="productImg"></typeAlias>
         <typeAlias type="com.icia.shop.dto.CartDTO" alias="cart"></typeAlias>
+        <typeAlias type="com.icia.shop.dto.CommentDTO" alias="comment"></typeAlias>
     </typeAliases>
 </configuration>

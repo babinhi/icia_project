@@ -14,6 +14,7 @@
 <html>
 <head>
     <title>Title</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="/resources/css/main.css">
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -23,11 +24,11 @@
 <body>
 <%@include file="../componnet/header.jsp" %>
 <%@include file="../componnet/nav.jsp" %>
-<div id="section">
+<div id="section" class="container">
     <form action="/order/cart" name="form1" id="form1" method="post">
         <h2>장바구니</h2>
         <c:choose>
-            <c:when test="${map.count == 0}">
+            <c:when test="${cart.count == 0}">
                 장바구니가 비어있습니다.
             </c:when>
             <c:otherwise>
@@ -39,29 +40,35 @@
                         <th>금액</th>
                         <th>취소</th>
                     </tr>
-                    <c:forEach var="row" items="${map.list}" varStatus="status">
+                    <c:forEach var="row" items="${map.list}" varStatus="i">
                         <tr>
-                            <td>${row.productTitle}</td>
-                            <td style="width: 80px; text-align: right">
-                                <fmt:formatNumber pattern="###,###,###" value="${row.productPrice}"/>
-                            </td>
-                            <td style="text-align: right">
-                                <input type="number" style="width: 40px" name="amount" value="${row.productCnt}" min="1">
-                                <input type="hidden" name="productId" value="${row.productId}">
-                            </td>
-                            <td style="width: 100px; text-align: right">
-                                <fmt:formatNumber pattern="###,###,###" value="${row.money}"/>
+                            <td style="width: 80px;text-align: right">${row.productTitle}</td>
+                            <td style="width: 80px;text-align: right">
+                                <fmt:formatNumber pattern="###,###,###"
+                                                  value="${row.productPrice / 0.9}"/>원
                             </td>
                             <td>
-                                <a href="/order/delete?id=${row.id}">장바구니 삭제</a>
+                                <input type="number" style="width: 40px" name="productCnt" value="${row.productCnt}"
+                                       min="1">
+                                <input type="hidden" name="productId" value="${row.productId}">
+                            </td>
+                            <td style="width: 80px;text-align: right">
+                                <fmt:formatNumber pattern="###,###,###"
+                                                  value="${row.productPrice}"/>원
+                            </td>
+                            <td style="width: 100px; text-align: right">
+                                <fmt:formatNumber pattern="###,###,###" value="${row.money}"/>원
+                            </td>
+                                <%--  + 기호는 문자열을 연결하는 연산자이지만, JSP 표현 언어에서는 ${}로 변수 값을 가져올 수 있습니다. --%>
+                            <td><a href="/cart/delete?id=${row.id}">상품 삭제</a>
                             </td>
                         </tr>
                     </c:forEach>
                     <tr>
                         <td colspan="5" style="text-align: right">
-                            장바구니 금액: <fmt:formatNumber pattern="###,###,###" value="${map.sumMoney}"/><br>
+                            장바구니 금액: <fmt:formatNumber pattern="###,###,###" value="${map.sumMoney}"></fmt:formatNumber><br>
                             배송비: ${map.fee}<br>
-                            합계: <fmt:formatNumber pattern="###,###,###" value="${map.allSum}"/>
+                            합계: <fmt:formatNumber pattern="###,###,###" value="${map.allSum}"></fmt:formatNumber>
                         </td>
                     </tr>
                 </table>

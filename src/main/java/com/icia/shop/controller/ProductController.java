@@ -1,9 +1,7 @@
 package com.icia.shop.controller;
 
-import com.icia.shop.dto.MemberDTO;
-import com.icia.shop.dto.PageDTO;
-import com.icia.shop.dto.ProductDTO;
-import com.icia.shop.dto.ProductFileDTO;
+import com.icia.shop.dto.*;
+import com.icia.shop.service.CommentService;
 import com.icia.shop.service.InquireService;
 import com.icia.shop.service.MemberService;
 import com.icia.shop.service.ProductService;
@@ -24,6 +22,8 @@ public class ProductController {
     private MemberService memberService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/productSave")
     public String productForm(HttpSession session, Model model) {
@@ -92,8 +92,6 @@ public class ProductController {
     @GetMapping("/detail")
     public String detail(@RequestParam("id") Long id,
                          @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                         @RequestParam(value = "q", required = false, defaultValue = "") String q,
-                         @RequestParam(value = "type",required = false, defaultValue = "productTitle") String type,
                          Model model) {
         //조회수를 1씩 증가시키는 메소드이다
         productService.updateHits(id);
@@ -109,15 +107,15 @@ public class ProductController {
             model.addAttribute("productFileList", productFileDTO);
             System.out.println("productFileDTO = " + productFileDTO);
         }
-//        List<CommentDTO> commentDTOList = commentService.findAll(id);
-//        if (commentDTOList.size() == 0) {
-//            //댓글이 없으면 list에 null적용
-//            model.addAttribute("commentList", null);
-//        } else {
-//            //댓글이 있으면 서버에서 가져온 commentDTOList를 넘겨준다
-//            model.addAttribute("commentList", commentDTOList);
-//            System.out.println("야야야commentDTOList = " + commentDTOList);
-//        }
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        if (commentDTOList.size() == 0) {
+            //댓글이 없으면 list에 null적용
+            model.addAttribute("없을때 commentList", null);
+        } else {
+            //댓글이 있으면 서버에서 가져온 commentDTOList를 넘겨준다
+            model.addAttribute("commentList", commentDTOList);
+            System.out.println("pro controller commentDTOList = " + commentDTOList);
+        }
         return "productPages/ProductDetail";
     }
     @GetMapping("/update")

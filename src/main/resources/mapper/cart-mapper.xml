@@ -25,19 +25,21 @@
     </insert>
     <!--    장바구니 리스트-->
     <select id="listCart" parameterType="Long" resultType="cart">
-        SELECT c.id,
+        select c.id,
                c.memberId,
-               p.id AS productId,
+               c.productId,
                m.memberName,
                p.productTitle,
                c.productCnt,
                p.productPrice,
-               (p.productPrice * c.productCnt) AS money
-        FROM cart_table c
-                 INNER JOIN smember_table m ON m.id = c.memberId
-                 INNER JOIN product_table p ON p.id = c.productId
-        WHERE c.memberId = #{memberId}
-        ORDER BY c.id
+               (p.productPrice * c.productCnt) money
+        from smember_table m,
+             product_table p,
+             cart_table c
+        where m.id = c.memberId
+          and p.id = c.productId
+          and c.memberId = #{memberId}
+        order by c.id
     </select>
     <!--    장바구니 전체 금액-->
     <select id="sumMoney" parameterType="Long" resultType="int">
@@ -48,4 +50,17 @@
           AND c.memberId = #{memberId}
 
     </select>
+    <!--    장바구니 수량을 변경후 수정을 누르면 수정-->
+    <update id="modifyCart" parameterType="cart">
+        update cart_table
+        set productCnt=#{productCnt}
+        where productId = #{productId}
+          and memberId = #{memberId}
+    </update>
+    <!--    장바구니 삭제-->
+    <delete id="delete" parameterType="long">
+        delete
+        FROM cart_table
+        where id = #{id}
+    </delete>
 </mapper>

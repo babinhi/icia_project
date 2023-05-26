@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/main.css">
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
@@ -87,7 +87,7 @@
                                         <option value="${i}">${i}</option>
                                     </c:forEach>
                                 </select>&nbsp;개
-<%--                                <button class="btn btn-default btn-cart">장바구니에 담기</button>--%>
+                                <%--                                <button class="btn btn-default btn-cart">장바구니에 담기</button>--%>
                                 <button onclick="cartForm()">장바구니에 담기</button>
                             </form>
                         </td>
@@ -112,43 +112,43 @@
     <button class="btn btn-default btn-wishlist">위시리스트</button>
 </div>
 
-<br><br>
+<br>
 <h2>──────────────────────────────────────────────────────────────────────────────────────────────</h2> <br><br>
-<%--    <div id="comment-write-area">--%>
-<%--        댓글 작성자<input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}"--%>
-<%--                     readonly><br>--%>
-<%--        <input type="text" name="commentContents" id="comment-contents" placeholder="댓글"><br>--%>
-<%--        <button onclick="comment_write()">댓글</button>--%>
-<%--    </div>--%>
-<%--    <div id="comment-list">--%>
-<%--        <c:choose>--%>
-<%--            <c:when test="${commentList == null}">--%>
-<%--                <h5>현재 작성된 댓글이 없습니다.</h5>--%>
-<%--            </c:when>--%>
-<%--            <c:otherwise>--%>
-<%--                <table>--%>
-<%--                    <tr>--%>
-<%--                        <th>id</th>--%>
-<%--                        <th>작성자</th>--%>
-<%--                        <th>내용</th>--%>
-<%--                        <th>작성시간</th>--%>
-<%--                    </tr>--%>
-<%--                    <c:forEach items="${commentList}" var="comment">--%>
-<%--                        <tr>--%>
-<%--                            <td>${comment.id}</td>--%>
-<%--                            <td>${comment.commentWriter}</td>--%>
-<%--                            <td>${comment.commentContents}</td>--%>
-<%--                            <td>--%>
-<%--                                <fmt:formatDate value="${comment.commentCreatedDate}"--%>
-<%--                                                pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-<%--                </table>--%>
-<%--            </c:otherwise>--%>
-<%--        </c:choose>--%>
-<%--    </div>--%>
-<%--</div>--%>
+<div id="commentOk">
+    <div id="comment-write-area" style="display: inline-block;">
+        리뷰 <input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}" readonly>
+        <input type="text" name="commentContents" id="comment-contents" placeholder="댓글" style="display: inline-block">
+        <button onclick="comment_write()" style="display: inline-block">댓글</button>
+    </div>
+</div><br><br>
+<div id="comment-list" class="table table-striped table-hover text-center rounded-3">
+    <c:choose>
+        <c:when test="${commentList == null}">
+            <h5>현재 작성된 댓글이 없습니다.</h5>
+        </c:when>
+        <c:otherwise>
+            <table>
+                <tr>
+
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>작성시간</th>
+                </tr>
+                <c:forEach items="${commentList}" var="comment">
+                    <tr>
+                        <td>${comment.commentWriter}</td>
+                        <td>${comment.commentContents}</td>
+                        <td>
+                            <fmt:formatDate value="${comment.commentCreatedDate}"
+                                            pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
+</div>
+
 <%@include file="../componnet/footer.jsp" %>
 </body>
 <script>
@@ -225,13 +225,12 @@
     // });
 
     const cartForm = (id) => {
-        console.log("${product.id}"); // product.id 값을 확인하기 위한 출력문 추가
         console.log(id); // id 값을 확인하기 위한 출력문 추가
 
         const productCnt = document.getElementsByName("productCnt")[0].value;
         if (confirm("장바구니에 추가하시겠습니까?")) {
-            if ('${sessionScope.loginEmail}' == null) {
-                alert("로그인을 해주세요")
+            if ('<%= session.getAttribute("loginEmail") %>' == null) {
+                alert("로그인을 해주세요");
                 location.href = "/member/login";
             } else {
                 location.href = "/order/cart?id=" + id + "&productCnt=" + productCnt;
@@ -239,50 +238,49 @@
         } else {
             location.reload();
         }
-    }
+    };
 
 
-    <%--const comment_write = () => {--%>
-    <%--    const commentWriter = document.getElementById("comment-writer").value;--%>
-    <%--    const commentContents = document.getElementById("comment-contents").value;--%>
-    <%--    const boardId = '${board.id}';--%>
-    <%--    const result = document.getElementById("comment-list");--%>
+    const comment_write = () => {
+        const commentWriter = document.getElementById("comment-writer").value;
+        const commentContents = document.getElementById("comment-contents").value;
+        const productId = '${product.id}';
+        const result = document.getElementById("comment-list");
 
-    <%--    $.ajax({--%>
-    <%--        type: "post",--%>
-    <%--        url: "/comment/save",--%>
-    <%--        data: {--%>
-    <%--            "commentWriter": commentWriter,--%>
-    <%--            "commentContents": commentContents,--%>
-    <%--            "boardId": boardId--%>
-    <%--        },--%>
-    <%--        success: function (res) {--%>
-    <%--            let output = "<table>";--%>
-    <%--            output += "<tr>";--%>
-    <%--            output += "<th>id</th>";--%>
-    <%--            output += "<th>작성자</th>";--%>
-    <%--            output += "<th>내용</th>";--%>
-    <%--            output += "<th>작성시간</th>";--%>
-    <%--            output += "</tr>";--%>
-    <%--            for (let i in res) {--%>
-    <%--                output += "<tr>";--%>
-    <%--                output += "<td>" + res[i].id + "</td>";--%>
-    <%--                output += "<td>" + res[i].commentWriter + "</td>";--%>
-    <%--                output += "<td>" + res[i].commentContents + "</td>";--%>
-    <%--                output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";--%>
-    <%--                output += "</tr>";--%>
-    <%--            }--%>
-    <%--            output += "</table>";--%>
-    <%--            result.innerHTML = output;--%>
-    <%--            //인풋태그를 비우는 역할--%>
-    <%--            document.getElementById("comment-contents").value = "";--%>
-    <%--        },--%>
-    <%--        error: function (res) {--%>
-
-    <%--            console.log("실패");--%>
-    <%--        }--%>
-
-    <%--    });--%>
+        $.ajax({
+            type: "post",
+            url: "/comment/save",
+            data: {
+                "commentWriter": commentWriter,
+                "commentContents": commentContents,
+                "productId": productId
+            },
+            success: function (res) {
+                let output = "<table>";
+                output += "<tr>";
+                output += "<th>id</th>";
+                output += "<th>작성자</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성시간</th>";
+                output += "</tr>";
+                for (let i in res) {
+                    output += "<tr>";
+                    output += "<td>" + res[i].id + "</td>";
+                    output += "<td>" + res[i].commentWriter + "</td>";
+                    output += "<td>" + res[i].commentContents + "</td>";
+                    output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                result.innerHTML = output;
+                // 인풋태그를 비우는 역할
+                document.getElementById("comment-contents").value = "";
+            },
+            error: function (res) {
+                console.log("실패");
+            }
+        });
+    };
 
 
 </script>
