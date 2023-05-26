@@ -82,10 +82,10 @@
                             <form action="/order/cart" name="form1" method="post"
                                   onsubmit="return cartForm('${product.id}')">
                                 <input type="hidden" name="id" value="${product.id}">
-                                <select name="amount">
-                                    <c:forEach begin="1" end="10" var="i">
-                                        <option value="${i}">${i}</option>
-                                    </c:forEach>
+<%--                                <select name="amount">--%>
+<%--                                    <c:forEach begin="1" end="10" var="i">--%>
+<%--                                        <option value="${i}">${i}</option>--%>
+<%--                                    </c:forEach>--%>
                                 </select>&nbsp;개
                                 <%--                                <button class="btn btn-default btn-cart">장바구니에 담기</button>--%>
                                 <button onclick="cartForm()">장바구니에 담기</button>
@@ -113,15 +113,16 @@
 </div>
 
 <br>
-<h2>──────────────────────────────────────────────────────────────────────────────────────────────</h2> <br><br>
-<div id="commentOk">
-    <div id="comment-write-area" style="display: inline-block;">
-        리뷰 <input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}" readonly>
+<h2>──────────────────────────────────────────────────────────────────────────────────────────────</h2>
+<div id="commentOk" style="margin: 20px">
+    <div id="comment-write-area" >
+        리뷰 <input type="text" name="commentWriter" id="comment-writer" value="${sessionScope.loginEmail}"
+                  style="display: inline-block" readonly>
         <input type="text" name="commentContents" id="comment-contents" placeholder="댓글" style="display: inline-block">
         <button onclick="comment_write()" style="display: inline-block">댓글</button>
     </div>
-</div><br><br>
-<div id="comment-list" class="table table-striped table-hover text-center rounded-3">
+</div><br>
+<div id="comment-list" class="table table-striped table-hover text-center rounded-3 ms-5">
     <c:choose>
         <c:when test="${commentList == null}">
             <h5>현재 작성된 댓글이 없습니다.</h5>
@@ -258,14 +259,12 @@
             success: function (res) {
                 let output = "<table>";
                 output += "<tr>";
-                output += "<th>id</th>";
                 output += "<th>작성자</th>";
                 output += "<th>내용</th>";
                 output += "<th>작성시간</th>";
                 output += "</tr>";
                 for (let i in res) {
                     output += "<tr>";
-                    output += "<td>" + res[i].id + "</td>";
                     output += "<td>" + res[i].commentWriter + "</td>";
                     output += "<td>" + res[i].commentContents + "</td>";
                     output += "<td>" + moment(res[i].commentCreatedDate).format("YYYY-MM-DD HH:mm:ss") + "</td>";
