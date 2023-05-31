@@ -6,10 +6,16 @@
         <li class="login-name">
             <c:choose>
                 <c:when test="${sessionScope.loginEmail != null}">
-                    <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}">${sessionScope.loginEmail} 님</a>
+                    <a>${sessionScope.loginEmail} 님</a>
+
+                    <c:if test="${sessionScope.loginEmail != 'admin'}">
+                        <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}">마이페이지</a>
+                        <a href="/order/cart">장바구니</a>
+                    </c:if>
                     <a href="/member/logout">logout</a>
                 </c:when>
                 <c:otherwise>
+                    <a href="/member/save">sign up</a>
                     <a href="/member/login">login</a>
                 </c:otherwise>
             </c:choose>
@@ -20,6 +26,12 @@
                 <a href="/product/productSave" class="left1">상품등록</a>
             </c:if>
         </li>
+<%--        <li class="login-name">--%>
+<%--            <c:if test="${sessionScope.loginEmail != 'admin'}">--%>
+<%--                <a href="/member/myPage?loginEmail=${sessionScope.loginEmail}">마이페이지</a>--%>
+<%--                <a href="/order/cart">장바구니</a>--%>
+<%--            </c:if>--%>
+<%--        </li>--%>
         </li>
     </ul>
     <h2><a href="/">icia shop</a></h2>

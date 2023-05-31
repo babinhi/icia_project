@@ -36,7 +36,9 @@
         <td>${member.memberAddress}</td>
         <td>${member.memberMobile}</td>
         <td>
-          <button onclick="manager('${member.id}')">회원삭제</button>
+          <c:if test="${sessionScope.loginEmail == 'admin' && member.memberEmail != 'admin'}">
+            <button onclick="manager('${member.id}')">회원삭제</button>
+          </c:if>
         </td>
       </tr>
     </c:forEach>

@@ -79,16 +79,14 @@
                     </tr>
                     <tr style="text-align: center">
                         <td colspan="2">
-                            <form action="/order/cart" name="form1" method="post"
-                                  onsubmit="return cartForm('${product.id}')">
+                            <form action="/order/cart" name="form1" method="post" onsubmit="return cartForm('${product.id}')">
                                 <input type="hidden" name="id" value="${product.id}">
-<%--                                <select name="amount">--%>
-<%--                                    <c:forEach begin="1" end="10" var="i">--%>
-<%--                                        <option value="${i}">${i}</option>--%>
-<%--                                    </c:forEach>--%>
-                                </select>&nbsp;개
-                                <%--                                <button class="btn btn-default btn-cart">장바구니에 담기</button>--%>
-                                <button onclick="cartForm()">장바구니에 담기</button>
+                                <select name="amount" onchange="cartForm(this.value)">
+                                    <c:forEach begin="1" end="10" var="i">
+                                        <option value="${i}">${i}</option>
+                                    </c:forEach>
+                                </select>&nbsp;
+                                <button type="submit" class="btn btn-default btn-cart">장바구니에 담기</button>
                             </form>
                         </td>
                     </tr>
@@ -153,6 +151,10 @@
 <%@include file="../componnet/footer.jsp" %>
 </body>
 <script>
+    const productPrice = ${product.productPrice}; // 가격을 동적으로 가져옴
+    const calculatedPrice = Math.floor(productPrice / 0.9); // 가격을 0.9로 나눈 후 소수점 아래를 제거하여 정수로 변환
+    const discountedPrice = productPrice.toLocaleString(); // 할인가에 1000단위 쉼표를 붙임
+
     <%--const product_update = () => {--%>
     <%--    const id = '${product.id}';--%>
     <%--    location.href = "/product/update?id=" + id;--%>
@@ -229,6 +231,24 @@
         console.log(id); // id 값을 확인하기 위한 출력문 추가
 
         const productCnt = document.getElementsByName("productCnt")[0].value;
+        if (confirm("장바구니에 추가하시겠습니까?")) {
+            if ('<%= session.getAttribute("loginEmail") %>' == null) {
+                alert("로그인을 해주세요");
+                location.href = "/member/login";
+            } else {
+                location.href = "/order/cart?id=" + id + "&productCnt=" + productCnt;
+            }
+        } else {
+            location.reload();
+        }
+    };
+    const cartForm = (id) => {
+        <%--const id = '<%= product.id %>'; // 상품의 ID 값을 직접 삽입--%>
+        console.log('<%= product.id %>');
+        console.log(id); // id 값을 확인하기 위한 출력문 추가
+
+        const productCnt = document.getElementsByName("amount")[0].value; // "amount"으로 수정
+
         if (confirm("장바구니에 추가하시겠습니까?")) {
             if ('<%= session.getAttribute("loginEmail") %>' == null) {
                 alert("로그인을 해주세요");
